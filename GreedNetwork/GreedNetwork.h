@@ -9,9 +9,9 @@
 #ifndef GreedNetwork_h
 #define GreedNetwork_h
 
-#import "NSObject+GreedNetwork.h"
 #import "GRNetworkForm.h"
 #import "GRNetworkResponse.h"
 #import "GRNetworkQueue.h"
+#import "NSObject+GreedNetwork.h"
 
 #endif /* GreedNetwork_h */

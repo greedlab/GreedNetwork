@@ -19,14 +19,18 @@
                        success:(void (^)(GRNetworkResponse *responseObject))success
                        failure:(void (^)(NSError *error))failure
 {
-    [self baseRequestWithNetworkForm:form success:^(NSHTTPURLResponse *response,GRNetworkResponse *responseObject) {
+    [self requestWithNetworkForm:form responseSerializer:[AFJSONResponseSerializer serializer] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        GRNetworkResponse *response = [[GRNetworkResponse alloc] init];
+        [response setResponseObject:responseObject];
+        response.responseCode = operation.response.statusCode;
         if (form.successBlock) {
-            form.successBlock(responseObject);
+            form.successBlock(response);
         }
         if (success) {
-            success(responseObject);
+            success(response);
         }
-    } failure:^(NSHTTPURLResponse *response,NSError *error) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"*** GreedNetwork *** request eror with status code:%ld",(long)operation.response.statusCode);
         if (form.failureBlock) {
             form.failureBlock(error);
         }
@@ -36,29 +40,10 @@
     }];
 }
 
-- (void)baseRequestWithNetworkForm:(GRNetworkForm *)form
-                       success:(void (^)(NSHTTPURLResponse *response,GRNetworkResponse *responseObject))success
-                       failure:(void (^)(NSHTTPURLResponse *response,NSError *error))failure;
-{
-    [self baseRequestWithNetworkForm:form responseSerializer:[AFJSONResponseSerializer serializer] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        GRNetworkResponse *response = [[GRNetworkResponse alloc] init];
-        [response setResponseObject:responseObject];
-        response.responseCode = operation.response.statusCode;
-        if (success) {
-            success(operation.response,response);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"*** GreedNetwork *** request eror with status code:%ld",(long)operation.response.statusCode);
-        if (failure) {
-            failure(operation.response,error);
-        }
-    }];
-}
-
-- (void)baseRequestWithNetworkForm:(GRNetworkForm *)form
-                responseSerializer:(AFHTTPResponseSerializer <AFURLResponseSerialization> *) responseSerializer
-                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+- (void)requestWithNetworkForm:(GRNetworkForm *)form
+            responseSerializer:(AFHTTPResponseSerializer <AFURLResponseSerialization> *) responseSerializer
+                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     if (!form) {
         NSLog(@"*** GreedNetwork *** form is nill");
@@ -70,7 +55,7 @@
         failure(nil,nil);
         return;
     }
-    if (form.requestParameters) {
+    if (!form.requestParameters) {
         NSLog(@"*** GreedNetwork *** requestParameters is nill");
         failure(nil,nil);
         return;

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GRNetworkResponse.h"
 
 /**
  * request method
@@ -71,6 +72,7 @@ typedef void(^GRNetworkFailure)(NSError *error);
 @property(nonatomic,strong)NSData *uploadData;
 
 @property(nonatomic,copy)GRNetworkSuccess successBlock;
+
 @property(nonatomic,copy)GRNetworkFailure failureBlock;
 
 @end

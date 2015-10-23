@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CEB1979E39A0EED357CC290691D2B1F8"
+               BlueprintIdentifier = "B6A193DF0B50B4EBE16BE54BA8D8AB4B"
                BuildableName = "libGreedNetwork.a"
                BlueprintName = "GreedNetwork"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CEB1979E39A0EED357CC290691D2B1F8"
+            BlueprintIdentifier = "B6A193DF0B50B4EBE16BE54BA8D8AB4B"
             BuildableName = "libGreedNetwork.a"
             BlueprintName = "GreedNetwork"
             ReferencedContainer = "container:Pods.xcodeproj">

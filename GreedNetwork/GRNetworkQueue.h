@@ -14,10 +14,13 @@
  */
 @interface GRNetworkQueue : NSObject
 {
+    /**
+     *  whether requesting network
+     */
     BOOL _requesting;
 }
 
-@property(nonatomic,strong,readonly)NSMutableArray *forms;
+@property(nonatomic,strong,readonly)NSMutableArray<__kindof GRNetworkForm*> *forms;
 
 + (GRNetworkQueue*)getInstance;
 
