@@ -1,7 +1,5 @@
-# GreedNetwork
+# GreedNetwork [![Join the chat at https://gitter.im/greedlab/GreedNetwork](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/greedlab/GreedNetwork?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/greedlab/GreedNetwork.svg?branch=master)](https://travis-ci.org/greedlab/GreedNetwork)
 
-[![Join the chat at https://gitter.im/greedlab/GreedNetwork](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/greedlab/GreedNetwork?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/greedlab/GreedNetwork.svg?branch=master)](https://travis-ci.org/greedlab/GreedNetwork)
-# Introduce
 network request for iOS, based on [AFNetworking](https://github.com/AFNetworking/AFNetworking) and [MJExtension](https://github.com/CoderMJLee/MJExtension)
 # Installation
 pod 'GreedNetwork'
