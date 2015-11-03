@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "GreedNetwork.h"
 #import "GRTestForm.h"
+#import "GReedJSON.h"
 
 @interface ViewController ()
 
@@ -32,6 +33,7 @@
 {
     GRTestForm *form = [[GRTestForm alloc] init];
     form.q = @"GreedNetwork";
+    NSLog(@"form:%@",[form gr_dictionary]);
     [self requestWithNetworkForm:form success:^(GRNetworkResponse *responseObject) {
         NSLog(@"request:%@",responseObject.responseDictionary);
     } failure:^(NSError *error) {
@@ -51,6 +53,7 @@
             NSLog(@"queue_%@:%@",@(index),[error userInfo]);
         };
         
+        NSLog(@"form:%@",[form gr_dictionary]);
         [[GRNetworkQueue getInstance] addForm:form];
     }
 }

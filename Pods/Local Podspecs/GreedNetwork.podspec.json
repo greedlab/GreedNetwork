@@ -1,8 +1,8 @@
 {
   "name": "GreedNetwork",
-  "version": "0.0.1",
-  "summary": "convenient storage for ios",
-  "description": "this is a storage manager for ios. based on FMDB and MJExtension. can save NSDictionary,NSArray,NSData,NSString,NSNumber or NSObject  directly",
+  "version": "0.0.2",
+  "summary": "network request for iOS",
+  "description": "network request for iOS, based on AFNetworking and GreedJSON",
   "homepage": "https://github.com/greedlab/GreedNetwork",
   "license": "MIT",
   "authors": {
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/greedlab/GreedNetwork.git",
-    "tag": "0.0.1"
+    "tag": "0.0.2"
   },
   "source_files": [
     "GreedNetwork",
@@ -25,7 +25,7 @@
     "AFNetworking": [
 
     ],
-    "MJExtension": [
+    "GreedJSON": [
 
     ]
   }

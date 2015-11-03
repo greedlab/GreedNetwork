@@ -20,10 +20,10 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - GreedNetwork (0.0.1):
+  - GreedJSON (0.0.7)
+  - GreedNetwork (0.0.2):
     - AFNetworking
-    - MJExtension
-  - MJExtension (2.5.14)
+    - GreedJSON
 
 DEPENDENCIES:
   - GreedNetwork (from `./`)
@@ -34,7 +34,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
-  GreedNetwork: 94413120d95298fa72bc51ee6220b5388aa4bcaa
-  MJExtension: fb8e6e900fb44c9a7be435ba3d72b7fdf5f0994c
+  GreedJSON: 31ddb0e46f6f553540d4b12839745a976b4cece5
+  GreedNetwork: 1e82c36cdeca8eb2d1063339ba16209dd0336b91
 
 COCOAPODS: 0.39.0

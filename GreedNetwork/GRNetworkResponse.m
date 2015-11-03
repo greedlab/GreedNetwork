@@ -7,7 +7,7 @@
 //
 
 #import "GRNetworkResponse.h"
-#import "MJExtension.h"
+#import "GreedJSON.h"
 
 @interface GRNetworkResponse(private)
 
@@ -39,7 +39,7 @@
 {
     _responseString = responseString;
     
-    id object = [_responseString JSONObject];
+    id object = [_responseString gr_object];
     if ([object isKindOfClass:[NSDictionary class]]) {
         _responseDictionary = (NSDictionary*)object;
     } else if ([object isKindOfClass:[NSArray class]]) {
@@ -51,14 +51,14 @@
 {
     _responseDictionary = responseDictionary;
     
-    _responseString = [_responseDictionary JSONString];
+    _responseString = [_responseDictionary gr_JSONString];
 }
 
 - (void)setResponseArray:(NSArray *)responseArray
 {
     _responseArray = responseArray;
     
-    _responseString = [_responseArray JSONString];
+    _responseString = [_responseArray gr_JSONString];
 }
 
 @end

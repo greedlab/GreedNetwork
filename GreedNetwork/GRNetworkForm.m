@@ -7,7 +7,7 @@
 //
 
 #import "GRNetworkForm.h"
-#import "MJExtension.h"
+#import "GReedJSON.h"
 
 @implementation GRNetworkForm
 
@@ -32,14 +32,14 @@
 - (NSDictionary *)requestParameters
 {
     if (!_requestParameters) {
-        _requestParameters = [self keyValues];
+        _requestParameters = [self gr_dictionary];
     }
     return _requestParameters;
 }
 
 #pragma mark - MJExtension
 
-+ (NSArray *)ignoredPropertyNames
++ (NSArray *)gr_ignoredPropertyNames
 {
     return @[@"requestHeader",@"requestParameters",@"url",@"networkAction",@"timeout",@"isUpload",@"uploadData",@"successBlock",@"failureBlock"];
 }
