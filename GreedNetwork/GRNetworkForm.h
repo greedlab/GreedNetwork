@@ -34,6 +34,10 @@ typedef void(^GRNetworkFailure)(NSError *error);
  *  request form
  */
 @interface GRNetworkForm : NSObject
+{
+    NSDictionary *_requestHeader;
+    NSDictionary *_requestParameters;
+}
 
 /**
  * request header
