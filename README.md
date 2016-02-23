@@ -15,10 +15,11 @@ pod 'GreedNetwork'
 {
     GRTestForm *form = [[GRTestForm alloc] init];
     form.q = @"GreedNetwork";
-    [self requestWithNetworkForm:form success:^(GRNetworkResponse *responseObject) {
+    NSLog(@"form:%@",[form gr_dictionary]);
+    [self gr_requestWithNetworkForm:form success:^(GRNetworkResponse *responseObject) {
         NSLog(@"request:%@",responseObject.responseDictionary);
-    } failure:^(NSError *error) {
-        NSLog(@"request:%@",[error userInfo]);
+    } failure:^(GRNetworkResponse *responseObject) {
+        NSLog(@"request:%@",[responseObject.error userInfo]);
     }];
 }
 ```
@@ -34,10 +35,11 @@ pod 'GreedNetwork'
         form.successBlock = ^(GRNetworkResponse *responseObject) {
             NSLog(@"queue_%@:%@",@(index),responseObject.responseDictionary);
         };
-        form.failureBlock = ^(NSError *error) {
-            NSLog(@"queue_%@:%@",@(index),[error userInfo]);
+        form.failureBlock = ^(GRNetworkResponse *responseObject) {
+            NSLog(@"queue_%@:%@",@(index),[responseObject.error userInfo]);
         };
         
+        NSLog(@"form:%@",[form gr_dictionary]);
         [[GRNetworkQueue getInstance] addForm:form];
     }
 }
