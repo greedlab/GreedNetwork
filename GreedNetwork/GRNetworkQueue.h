@@ -6,35 +6,43 @@
 //  Copyright © 2015年 GreedLab. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "GRNetworkForm.h"
+#import <Foundation/Foundation.h>
 
 /**
  *  request the form one by one
  */
-@interface GRNetworkQueue : NSObject
-{
+@interface GRNetworkQueue : NSObject {
     /**
      *  whether requesting network
      */
     BOOL _requesting;
 }
 
-@property(nonatomic,strong,readonly)NSMutableArray<__kindof GRNetworkForm*> *forms;
+//@property (nonatomic, assign) BOOL
+@property (nonatomic, strong, readonly) NSMutableArray<__kindof GRNetworkForm *> *forms;
 
-+ (GRNetworkQueue*)getInstance;
++ (GRNetworkQueue *)getInstance;
 
 /**
  *  add form to queue,and it will requeue one by one
  *
  */
-- (void)addForm:(GRNetworkForm*)form;
+- (void)addForm:(GRNetworkForm *)form;
+
+- (void)addForm:(GRNetworkForm *)form
+        success:(GRNetworkBlock)success
+        failure:(GRNetworkBlock)failure;
 
 /**
  *  request directly,no add to queue
  *
  */
-- (void)requestForm:(GRNetworkForm*)form;
+- (void)requestForm:(GRNetworkForm *)form;
+
+- (void)requestForm:(GRNetworkForm *)form
+            success:(GRNetworkBlock)success
+            failure:(GRNetworkBlock)failure;
 
 /**
  *  cancel all the requests which have not begin

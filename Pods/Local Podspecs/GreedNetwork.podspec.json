@@ -1,6 +1,6 @@
 {
   "name": "GreedNetwork",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "summary": "network request for iOS",
   "description": "network request for iOS, based on AFNetworking and GreedJSON",
   "homepage": "https://github.com/greedlab/GreedNetwork",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/greedlab/GreedNetwork.git",
-    "tag": "0.0.2"
+    "tag": "0.0.3"
   },
   "source_files": [
     "GreedNetwork",
@@ -26,6 +26,9 @@
 
     ],
     "GreedJSON": [
+
+    ],
+    "GreedEmoji": [
 
     ]
   }

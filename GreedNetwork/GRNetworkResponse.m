@@ -9,11 +9,11 @@
 #import "GRNetworkResponse.h"
 #import "GreedJSON.h"
 
-@interface GRNetworkResponse(private)
+@interface GRNetworkResponse (private)
 
-@property(nonatomic,strong)NSDictionary *responseDictionary;
-@property(nonatomic,strong)NSArray *responseArray;
-@property(nonatomic,strong)NSString *responseString;
+@property (nonatomic, strong) NSDictionary *responseDictionary;
+@property (nonatomic, strong) NSArray *responseArray;
+@property (nonatomic, strong) NSString *responseString;
 
 @end
 
@@ -21,43 +21,36 @@
 
 #pragma mark - setter
 
-- (void)setResponseObject:(id)responseObject
-{
+- (void)setResponseObject:(id)responseObject {
     _responseObject = responseObject;
     if ([_responseObject isKindOfClass:[NSData class]]) {
-        self.responseString = [[NSString alloc] initWithData:(NSData *)_responseObject encoding:NSUTF8StringEncoding];
+        self.responseString = [[NSString alloc] initWithData:(NSData *) _responseObject encoding:NSUTF8StringEncoding];
     } else if ([_responseObject isKindOfClass:[NSString class]]) {
-        self.responseString = (NSString*)_responseObject;
+        self.responseString = (NSString *) _responseObject;
     } else if ([_responseObject isKindOfClass:[NSDictionary class]]) {
-        self.responseDictionary = (NSDictionary*)_responseObject;
+        self.responseDictionary = (NSDictionary *) _responseObject;
     } else if ([_responseObject isKindOfClass:[NSArray class]]) {
-        self.responseArray = (NSArray *)_responseObject;
+        self.responseArray = (NSArray *) _responseObject;
     }
 }
 
-- (void)setResponseString:(NSString *)responseString
-{
+- (void)setResponseString:(NSString *)responseString {
     _responseString = responseString;
-    
     id object = [_responseString gr_object];
     if ([object isKindOfClass:[NSDictionary class]]) {
-        _responseDictionary = (NSDictionary*)object;
+        _responseDictionary = (NSDictionary *) object;
     } else if ([object isKindOfClass:[NSArray class]]) {
-        _responseArray = (NSArray *)object;
+        _responseArray = (NSArray *) object;
     }
 }
 
-- (void)setResponseDictionary:(NSDictionary *)responseDictionary
-{
+- (void)setResponseDictionary:(NSDictionary *)responseDictionary {
     _responseDictionary = responseDictionary;
-    
     _responseString = [_responseDictionary gr_JSONString];
 }
 
-- (void)setResponseArray:(NSArray *)responseArray
-{
+- (void)setResponseArray:(NSArray *)responseArray {
     _responseArray = responseArray;
-    
     _responseString = [_responseArray gr_JSONString];
 }
 

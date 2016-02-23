@@ -11,14 +11,14 @@
 
 @implementation GRNetworkForm
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     if (self) {
         _url = nil;
         _networkAction = GRNetworkActionGet;
         _timeout = 0;
         _isUpload = NO;
+        _aliseEmoji = YES;
     }
     return self;
 }
@@ -29,8 +29,7 @@
 
 #pragma mark - getter
 
-- (NSDictionary *)requestParameters
-{
+- (NSDictionary *)requestParameters {
     if (!_requestParameters) {
         _requestParameters = [self gr_dictionary];
     }
@@ -39,9 +38,8 @@
 
 #pragma mark - MJExtension
 
-+ (NSArray *)gr_ignoredPropertyNames
-{
-    return @[@"requestHeader",@"requestParameters",@"url",@"networkAction",@"timeout",@"isUpload",@"uploadData",@"successBlock",@"failureBlock"];
++ (NSArray *)gr_ignoredPropertyNames {
+    return @[ @"requestHeader", @"requestParameters", @"url", @"networkAction", @"timeout", @"isUpload", @"aliseEmoji", @"uploadData", @"successBlock", @"failureBlock" ];
 }
 
 @end

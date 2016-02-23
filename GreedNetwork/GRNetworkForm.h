@@ -6,14 +6,13 @@
 //  Copyright © 2015年 GreedLab. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "GRNetworkResponse.h"
+#import <Foundation/Foundation.h>
 
 /**
  * request method
  */
-typedef NS_ENUM(NSUInteger,GRNetworkAction)
-{
+typedef NS_ENUM(NSUInteger, GRNetworkAction) {
     GRNetworkActionGet = 0,
     GRNetworkActionPost = 1,
     GRNetworkActionPut = 2,
@@ -21,62 +20,68 @@ typedef NS_ENUM(NSUInteger,GRNetworkAction)
 };
 
 /**
- *  the response block for request success
+ *  the response block for request
  */
-typedef void(^GRNetworkSuccess)(GRNetworkResponse *responseObject);
-
-/**
- *  the response block for request failure
- */
-typedef void(^GRNetworkFailure)(NSError *error);
+typedef void (^GRNetworkBlock)(GRNetworkResponse *responseObject);
 
 /**
  *  request form
  */
-@interface GRNetworkForm : NSObject
-{
+@interface GRNetworkForm : NSObject {
     NSDictionary *_requestHeader;
     NSDictionary *_requestParameters;
 }
 
 /**
- * request header
+ *  request header
  */
-@property(nonatomic,strong)NSDictionary *requestHeader;
+@property (nonatomic, strong) NSDictionary *requestHeader;
 
 /**
- * request parameters
+ *  request parameters
  */
-@property(nonatomic,strong)NSDictionary *requestParameters;
+@property (nonatomic, strong) NSDictionary *requestParameters;
 
 /**
- * request url
+ *  request url
  */
-@property(nonatomic,strong)NSString *url;
+@property (nonatomic, strong) NSString *url;
 
 /**
- * request method
+ *  request method
  */
-@property(nonatomic,assign)GRNetworkAction networkAction;
+@property (nonatomic, assign) GRNetworkAction networkAction;
 
 /**
- * timeout
- * if = 0 use default from AFNetwork
+ *  timeout
+ *  if = 0 use default from AFNetwork
  */
-@property(nonatomic,assign)NSInteger timeout;
+@property (nonatomic, assign) NSInteger timeout;
 
 /**
- * whether upload file
+ *  whether convert alised string to emoji in response
+ *  default YES
  */
-@property(nonatomic,assign)BOOL isUpload;
+@property (nonatomic, assign) BOOL aliseEmoji;
 
 /**
- * the data of file
+ *  whether upload file
  */
-@property(nonatomic,strong)NSData *uploadData;
+@property (nonatomic, assign) BOOL isUpload;
 
-@property(nonatomic,copy)GRNetworkSuccess successBlock;
+/**
+ *  the data of file
+ */
+@property (nonatomic, strong) NSData *uploadData;
 
-@property(nonatomic,copy)GRNetworkFailure failureBlock;
+/**
+ *  success call back
+ */
+@property (nonatomic, copy) GRNetworkBlock successBlock;
+
+/**
+ *  failure call back
+ */
+@property (nonatomic, copy) GRNetworkBlock failureBlock;
 
 @end

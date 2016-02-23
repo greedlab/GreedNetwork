@@ -1,10 +1,15 @@
 # GreedNetwork [![Join the chat at https://gitter.im/greedlab/GreedNetwork](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/greedlab/GreedNetwork?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/greedlab/GreedNetwork.svg?branch=master)](https://travis-ci.org/greedlab/GreedNetwork)
 
 network request for iOS, based on [AFNetworking](https://github.com/AFNetworking/AFNetworking) and  [GreedJSON](https://github.com/greedlab/GreedJSON)
-# Installation
+
+## Installation
+
 pod 'GreedNetwork'
-# Usage
-## [NSObject+GreedNetwork](https://github.com/greedlab/GreedNetwork/blob/master/GreedNetwork/NSObject%2BGreedNetwork.h)
+
+## Usage
+
+### [NSObject+GreedNetwork](https://github.com/greedlab/GreedNetwork/blob/master/GreedNetwork/NSObject%2BGreedNetwork.h)
+
 ``` objc
 - (void)testRequest
 {
@@ -17,7 +22,9 @@ pod 'GreedNetwork'
     }];
 }
 ```
-## [GRNetworkQueue](https://github.com/greedlab/GreedNetwork/blob/master/GreedNetwork/GRNetworkQueue.h)
+
+### [GRNetworkQueue](https://github.com/greedlab/GreedNetwork/blob/master/GreedNetwork/GRNetworkQueue.h)
+
 ``` objc
 - (void)testQueue
 {
@@ -35,9 +42,11 @@ pod 'GreedNetwork'
     }
 }
 ```
-# Release Notes
-* 0.0.1 first version
-* 0.0.2 replace MJExtension to GreedJSON
 
-# LICENSE
-MIT
+## CHANGELOG
+
+[CHANGELOG.md](CHANGELOG.md)
+
+## LICENSE
+
+[MIT](LICENSE.md)
