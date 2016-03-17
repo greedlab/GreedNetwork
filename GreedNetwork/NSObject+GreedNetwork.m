@@ -129,6 +129,9 @@
 
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:mutableRequest];
     operation.responseSerializer = responseSerializer ? responseSerializer : [AFJSONResponseSerializer serializer];
+    NSSet *acceptableContentTypes = operation.responseSerializer.acceptableContentTypes;
+    NSString *plainContentType = @"text/plain";
+    operation.responseSerializer.acceptableContentTypes = acceptableContentTypes ? ([acceptableContentTypes containsObject:plainContentType] ? acceptableContentTypes : [acceptableContentTypes setByAddingObject:plainContentType]) : [NSSet setWithObject:plainContentType];
     [operation setCompletionBlockWithSuccess:success failure:failure];
     [operation start];
 }
