@@ -18,7 +18,7 @@
         _networkAction = GRNetworkActionGet;
         _timeout = 0;
         _isUpload = NO;
-        _aliseEmoji = YES;
+        _aliseEmoji = NO;
     }
     return self;
 }

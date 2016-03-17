@@ -60,7 +60,7 @@ typedef void (^GRNetworkBlock)(GRNetworkResponse *responseObject);
 
 /**
  *  whether convert alised string to emoji in response
- *  default YES
+ *  default NO
  */
 @property (nonatomic, assign) BOOL aliseEmoji;
 
