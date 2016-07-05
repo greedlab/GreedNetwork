@@ -8,8 +8,8 @@
 
 #import "ViewController.h"
 #import "GRTestForm.h"
-#import <GreedNetwork/GreedNetwork.h>
-#import <GreedNetwork/GReedJSON.h>
+#import "GreedNetwork.h"
+#import "GReedJSON.h"
 
 @interface ViewController ()
 

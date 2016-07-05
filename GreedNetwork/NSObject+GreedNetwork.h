@@ -14,7 +14,7 @@
 
 @interface NSObject (GreedNetwork)
 
-- (void)gr_requestWithNetworkForm:(GRNetworkForm *)form;
+- (void)gr_requestWithNetworkForm:(nullable GRNetworkForm *)form;
 
 - (void)gr_requestWithNetworkForm:(GRNetworkForm *)form
                           success:(void (^)(GRNetworkResponse *responseObject))success
@@ -22,16 +22,16 @@
 
 - (void)gr_requestWithNetworkForm:(GRNetworkForm *)form
                responseSerializer:(AFHTTPResponseSerializer<AFURLResponseSerialization> *)responseSerializer
-                          success:(void (^)(NSURLResponse * _Nonnull URLResponse, id  _Nullable responseObject))success
-                          failure:(void (^)(NSURLResponse * _Nonnull URLResponse,NSError * _Nullable error))failure;
+                          success:(nullable void (^)(NSURLResponse * _Nonnull URLResponse, id  _Nullable responseObject))success
+                          failure:(nullable void (^)(NSURLResponse * _Nonnull URLResponse,NSError * _Nullable error))failure;
 
 #pragma mark - deprecated
 
-- (void)requestWithNetworkForm:(GRNetworkForm *)form __deprecated_msg("Method deprecated. Use `gr_requestWithNetworkForm:form`");
+- (void)requestWithNetworkForm:(nullable GRNetworkForm *)form __deprecated_msg("Method deprecated. Use `gr_requestWithNetworkForm:form`");
 
-- (void)requestWithNetworkForm:(GRNetworkForm *)form
-            responseSerializer:(AFHTTPResponseSerializer<AFURLResponseSerialization> *)responseSerializer
-                       success:(void (^)(NSURLResponse * _Nonnull URLResponse, id  _Nullable responseObject))success
-                       failure:(void (^)(NSURLResponse * _Nonnull URLResponse,NSError * _Nullable error))failure  __deprecated_msg("Method deprecated. Use `gr_requestWithNetworkForm:form:responseSerializer:success:failure`");
+- (void)requestWithNetworkForm:(nullable GRNetworkForm *)form
+            responseSerializer:(nullable AFHTTPResponseSerializer<AFURLResponseSerialization> *)responseSerializer
+                       success:(nullable void (^)(NSURLResponse * _Nonnull URLResponse, id  _Nullable responseObject))success
+                       failure:(nullable void (^)(NSURLResponse * _Nonnull URLResponse,NSError * _Nullable error))failure  __deprecated_msg("Method deprecated. Use `gr_requestWithNetworkForm:form:responseSerializer:success:failure`");
 
 @end

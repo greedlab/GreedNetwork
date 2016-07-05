@@ -6,7 +6,7 @@
 //  Copyright © 2015年 GreedLab. All rights reserved.
 //
 
-#import <GreedNetwork/GreedNetwork.h>
+#import "GreedNetwork.h"
 
 @interface GRTestForm : GRNetworkForm
 
