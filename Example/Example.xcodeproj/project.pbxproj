@@ -16,8 +16,8 @@
 		289ADD911BD8CC7E006277FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 289ADD8F1BD8CC7E006277FD /* LaunchScreen.storyboard */; };
 		289ADD9B1BD8CEBE006277FD /* GreedNetwork.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 289ADD981BD8CEBE006277FD /* GreedNetwork.podspec */; };
 		7FF46EF87AF8E82465FC3588 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5475543CC36909D588E4D53B /* Pods_Example.framework */; };
-		E7E3D1011D2B978000B3CA0C /* Pods-Example.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E7E3D0FF1D2B978000B3CA0C /* Pods-Example.debug.xcconfig */; };
-		E7E3D1021D2B978000B3CA0C /* Pods-Example.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E7E3D1001D2B978000B3CA0C /* Pods-Example.release.xcconfig */; };
+		E770202C1D2BA46E00DDF7E7 /* Pods-Example.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E770202A1D2BA46E00DDF7E7 /* Pods-Example.debug.xcconfig */; };
+		E770202D1D2BA46E00DDF7E7 /* Pods-Example.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E770202B1D2BA46E00DDF7E7 /* Pods-Example.release.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,8 +36,8 @@
 		289ADD981BD8CEBE006277FD /* GreedNetwork.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GreedNetwork.podspec; path = ../GreedNetwork.podspec; sourceTree = "<group>"; };
 		5475543CC36909D588E4D53B /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE82C7C2CEC1B520B9F87DDD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		E7E3D0FF1D2B978000B3CA0C /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
-		E7E3D1001D2B978000B3CA0C /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
+		E770202A1D2BA46E00DDF7E7 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		E770202B1D2BA46E00DDF7E7 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +55,8 @@
 		25E0CC45B64A7DDE7AF995E0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E7E3D0FF1D2B978000B3CA0C /* Pods-Example.debug.xcconfig */,
-				E7E3D1001D2B978000B3CA0C /* Pods-Example.release.xcconfig */,
+				E770202A1D2BA46E00DDF7E7 /* Pods-Example.debug.xcconfig */,
+				E770202B1D2BA46E00DDF7E7 /* Pods-Example.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -176,11 +176,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7E3D1011D2B978000B3CA0C /* Pods-Example.debug.xcconfig in Resources */,
+				E770202C1D2BA46E00DDF7E7 /* Pods-Example.debug.xcconfig in Resources */,
 				289ADD911BD8CC7E006277FD /* LaunchScreen.storyboard in Resources */,
 				289ADD9B1BD8CEBE006277FD /* GreedNetwork.podspec in Resources */,
 				289ADD8E1BD8CC7E006277FD /* Assets.xcassets in Resources */,
-				E7E3D1021D2B978000B3CA0C /* Pods-Example.release.xcconfig in Resources */,
+				E770202D1D2BA46E00DDF7E7 /* Pods-Example.release.xcconfig in Resources */,
 				289ADD8C1BD8CC7E006277FD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,7 +271,6 @@
 /* Begin XCBuildConfiguration section */
 		289ADD931BD8CC7E006277FD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E7E3D0FF1D2B978000B3CA0C /* Pods-Example.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -354,9 +353,10 @@
 		};
 		289ADD961BD8CC7E006277FD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E7E3D0FF1D2B978000B3CA0C /* Pods-Example.debug.xcconfig */;
+			baseConfigurationReference = E770202A1D2BA46E00DDF7E7 /* Pods-Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.greedlab.Example;
@@ -366,9 +366,10 @@
 		};
 		289ADD971BD8CC7E006277FD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E7E3D1001D2B978000B3CA0C /* Pods-Example.release.xcconfig */;
+			baseConfigurationReference = E770202B1D2BA46E00DDF7E7 /* Pods-Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.greedlab.Example;
