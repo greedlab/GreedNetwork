@@ -21,10 +21,10 @@
 - (void)gr_requestWithNetworkForm:(GRNetworkForm *)form
                           success:(void (^)(GRNetworkResponse *responseObject))success
                           failure:(void (^)(GRNetworkResponse *responseObject))failure {
-    [self gr_requestWithNetworkForm:form responseSerializer:[AFJSONResponseSerializer serializer] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self gr_requestWithNetworkForm:form responseSerializer:[AFHTTPResponseSerializer serializer] success:^(NSURLResponse *_Nonnull URLResponse, id _Nullable responseObject) {
         GRNetworkResponse *response = [[GRNetworkResponse alloc] init];
         if (form.aliseEmoji) { // convert alise to emoji
-            NSString *retString;
+            NSString *retString; // response JSON string
             if ([responseObject isKindOfClass:[NSData class]]) {
                 retString = [[NSString alloc] initWithData:(NSData *) responseObject encoding:NSUTF8StringEncoding];
             } else if ([responseObject isKindOfClass:[NSString class]]) {
@@ -39,7 +39,10 @@
         } else {
             [response setResponseObject:responseObject];
         }
-        response.responseCode = operation.response.statusCode;
+        if ([URLResponse isKindOfClass:[NSHTTPURLResponse class]]) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) URLResponse;
+            response.responseCode = httpResponse.statusCode; // response status code
+        }
         if (form.successBlock) {
             form.successBlock(response);
         }
@@ -47,11 +50,10 @@
             success(response);
         }
     }
-        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"*** GreedNetwork *** request eror with status code:%ld", (long) operation.response.statusCode);
-            id responseObject = operation.responseObject;
+        failure:^(NSURLResponse *_Nonnull URLResponse, NSError *_Nullable error) {
+            NSString *responseObject = [[NSString alloc] initWithData:(NSData *) error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
             GRNetworkResponse *response = [[GRNetworkResponse alloc] init];
-            if (form.aliseEmoji) { // convert alise to emoji
+            if (form.aliseEmoji) {
                 NSString *retString;
                 if ([responseObject isKindOfClass:[NSData class]]) {
                     retString = [[NSString alloc] initWithData:(NSData *) responseObject encoding:NSUTF8StringEncoding];
@@ -67,7 +69,11 @@
             } else {
                 [response setResponseObject:responseObject];
             }
-            response.responseCode = operation.response.statusCode;
+            if ([URLResponse isKindOfClass:[NSHTTPURLResponse class]]) {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) URLResponse;
+                response.responseCode = httpResponse.statusCode;
+                NSLog(@"*** GreedNetwork *** request eror with status code:%ld", (long) httpResponse.statusCode);
+            }
             response.error = error;
             if (form.failureBlock) {
                 form.failureBlock(response);
@@ -80,8 +86,8 @@
 
 - (void)gr_requestWithNetworkForm:(GRNetworkForm *)form
                responseSerializer:(AFHTTPResponseSerializer<AFURLResponseSerialization> *)responseSerializer
-                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+                          success:(void (^)(NSURLResponse *_Nonnull URLResponse, id _Nullable responseObject))success
+                          failure:(void (^)(NSURLResponse *_Nonnull URLResponse, NSError *_Nullable error))failure {
     if (!form) {
         NSLog(@"*** GreedNetwork *** form is nill");
         failure(nil, nil);
@@ -98,14 +104,15 @@
         return;
     }
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
-
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = requestSerializer;
+    manager.responseSerializer = responseSerializer ? responseSerializer : [AFHTTPResponseSerializer serializer];
     NSMutableURLRequest *mutableRequest;
     if (form.isUpload) {
         NSSet *set = [requestSerializer HTTPMethodsEncodingParametersInURI];
         NSMutableSet *mutableSet = [set mutableCopy];
         [mutableSet addObject:@"POST"];
         [requestSerializer setHTTPMethodsEncodingParametersInURI:mutableSet];
-
         mutableRequest = [requestSerializer requestWithMethod:@"POST" URLString:form.url parameters:form.requestParameters error:nil];
         mutableRequest.HTTPBody = form.uploadData;
     } else {
@@ -119,21 +126,19 @@
             mutableRequest = [requestSerializer requestWithMethod:@"GET" URLString:form.url parameters:form.requestParameters error:nil];
         }
     }
-
     if (form.timeout) {
         [mutableRequest setTimeoutInterval:form.timeout];
     }
     if (form.requestHeader) {
         [mutableRequest setAllHTTPHeaderFields:form.requestHeader];
     }
-
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:mutableRequest];
-    operation.responseSerializer = responseSerializer ? responseSerializer : [AFJSONResponseSerializer serializer];
-    NSSet *acceptableContentTypes = operation.responseSerializer.acceptableContentTypes;
-    NSString *plainContentType = @"text/plain";
-    operation.responseSerializer.acceptableContentTypes = acceptableContentTypes ? ([acceptableContentTypes containsObject:plainContentType] ? acceptableContentTypes : [acceptableContentTypes setByAddingObject:plainContentType]) : [NSSet setWithObject:plainContentType];
-    [operation setCompletionBlockWithSuccess:success failure:failure];
-    [operation start];
+    [[manager dataTaskWithRequest:mutableRequest completionHandler:^(NSURLResponse *_Nonnull response, id _Nullable responseObject, NSError *_Nullable error) {
+        if (error) {
+            failure(response, error);
+        } else {
+            success(response, responseObject);
+        }
+    }] resume];
 }
 
 #pragma mark - deprecated
@@ -144,8 +149,8 @@
 
 - (void)requestWithNetworkForm:(GRNetworkForm *)form
             responseSerializer:(AFHTTPResponseSerializer<AFURLResponseSerialization> *)responseSerializer
-                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+                       success:(void (^)(NSURLResponse *_Nonnull URLResponse, id _Nullable responseObject))success
+                       failure:(void (^)(NSURLResponse *_Nonnull URLResponse, NSError *_Nullable error))failure {
     [self gr_requestWithNetworkForm:form responseSerializer:responseSerializer success:success failure:failure];
 }
 

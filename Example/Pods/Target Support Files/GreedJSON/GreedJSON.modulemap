@@ -1,0 +1,6 @@
+framework module GreedJSON {
+  umbrella header "GreedJSON-umbrella.h"
+
+  export *
+  module * { export * }
+}

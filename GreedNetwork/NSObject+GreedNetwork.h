@@ -22,8 +22,8 @@
 
 - (void)gr_requestWithNetworkForm:(GRNetworkForm *)form
                responseSerializer:(AFHTTPResponseSerializer<AFURLResponseSerialization> *)responseSerializer
-                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                          success:(void (^)(NSURLResponse * _Nonnull URLResponse, id  _Nullable responseObject))success
+                          failure:(void (^)(NSURLResponse * _Nonnull URLResponse,NSError * _Nullable error))failure;
 
 #pragma mark - deprecated
 
@@ -31,7 +31,7 @@
 
 - (void)requestWithNetworkForm:(GRNetworkForm *)form
             responseSerializer:(AFHTTPResponseSerializer<AFURLResponseSerialization> *)responseSerializer
-                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure __deprecated_msg("Method deprecated. Use `gr_requestWithNetworkForm:form:responseSerializer:success:failure`");
+                       success:(void (^)(NSURLResponse * _Nonnull URLResponse, id  _Nullable responseObject))success
+                       failure:(void (^)(NSURLResponse * _Nonnull URLResponse,NSError * _Nullable error))failure  __deprecated_msg("Method deprecated. Use `gr_requestWithNetworkForm:form:responseSerializer:success:failure`");
 
 @end

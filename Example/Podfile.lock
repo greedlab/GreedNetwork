@@ -1,0 +1,39 @@
+PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - GreedEmoji (0.0.1)
+  - GreedJSON (0.1.5)
+  - GreedNetwork (0.0.5):
+    - AFNetworking
+    - GreedEmoji
+    - GreedJSON
+
+DEPENDENCIES:
+  - GreedNetwork (from `../`)
+
+EXTERNAL SOURCES:
+  GreedNetwork:
+    :path: ../
+
+SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  GreedEmoji: 1060de8ed6701a4c0ab2863e8ff4e25f30de214e
+  GreedJSON: abed28e0d91240620114a442f3da48bc9fc60697
+  GreedNetwork: 795afe96fe4593eb25b14ce9cb4dbcce5a06fa24
+
+PODFILE CHECKSUM: ef80773a7ee03bc3bf598be1de970337cb9e7b2e
+
+COCOAPODS: 1.0.1

@@ -1,0 +1,6 @@
+framework module GreedNetwork {
+  umbrella header "GreedNetwork-umbrella.h"
+
+  export *
+  module * { export * }
+}
