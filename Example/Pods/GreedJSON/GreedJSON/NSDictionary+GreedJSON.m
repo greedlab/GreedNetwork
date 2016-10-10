@@ -10,26 +10,23 @@
 
 @implementation NSDictionary (GreedJSON)
 
-- (NSString*)gr_JSONString
-{
+- (NSString *)gr_JSONString {
     NSData *data = [self gr_JSONData];
     if (data) {
         return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     } else {
         return nil;
     }
-    
 }
 
-- (NSData*)gr_JSONData
-{
+- (NSData *)gr_JSONData {
     if (![NSJSONSerialization isValidJSONObject:self]) {
         return nil;
     }
     NSError *error;
     NSData *data = [NSJSONSerialization dataWithJSONObject:self options:NSJSONWritingPrettyPrinted error:&error];
     if (error) {
-        NSLog(@"** GreedJSON ** %@",[error localizedDescription]);
+        NSLog(@"** GreedJSON ** %@", [error localizedDescription]);
         return nil;
     }
     return data;

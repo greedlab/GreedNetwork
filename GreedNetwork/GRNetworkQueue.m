@@ -20,6 +20,10 @@
     return self;
 }
 
+- (void)dealloc {
+    [self.gr_sessionManager invalidateSessionCancelingTasks:YES];
+}
+
 + (GRNetworkQueue *)getInstance {
     static GRNetworkQueue *__networkQueue = nil;
 

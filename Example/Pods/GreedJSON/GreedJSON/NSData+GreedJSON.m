@@ -10,24 +10,22 @@
 
 @implementation NSData (GreedJSON)
 
-- (id)gr_object
-{
+- (id)gr_object {
     NSError *error;
 
     id object = [NSJSONSerialization JSONObjectWithData:self options:NSJSONReadingMutableContainers error:&error];
     if (error) {
-        NSLog(@"** GreedJSON ** %@",[error localizedDescription]);
+        NSLog(@"** GreedJSON ** %@", [error localizedDescription]);
         return nil;
     }
     return object;
 }
 
-- (id)gr_objectWithOptions:(NSJSONReadingOptions)options
-{
+- (id)gr_objectWithOptions:(NSJSONReadingOptions)options {
     NSError *error;
     id object = [NSJSONSerialization JSONObjectWithData:self options:options error:&error];
     if (error) {
-        NSLog(@"** GreedJSON ** %@",[error localizedDescription]);
+        NSLog(@"** GreedJSON ** %@", [error localizedDescription]);
         return nil;
     }
     return object;

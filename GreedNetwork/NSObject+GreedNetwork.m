@@ -10,11 +10,21 @@
 #import "NSDictionary+GreedJSON.h"
 #import "NSObject+GreedNetwork.h"
 #import "NSString+GreedEmoji.h"
+#import <objc/runtime.h>
 
 @implementation NSObject (GreedNetwork)
 
-- (void)gr_requestWithNetworkForm:(GRNetworkForm *)form;
-{
+@dynamic gr_sessionManager;
+
+- (AFHTTPSessionManager *)gr_sessionManager {
+    AFHTTPSessionManager *manager = objc_getAssociatedObject(self, _cmd);
+    if (!manager) {
+        manager = [AFHTTPSessionManager manager];
+    }
+    return manager;
+}
+
+- (void)gr_requestWithNetworkForm:(GRNetworkForm *)form {
     [self gr_requestWithNetworkForm:form success:nil failure:nil];
 }
 
@@ -104,7 +114,7 @@
         return;
     }
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = self.gr_sessionManager;
     manager.requestSerializer = requestSerializer;
     manager.responseSerializer = responseSerializer ? responseSerializer : [AFHTTPResponseSerializer serializer];
     NSMutableURLRequest *mutableRequest;

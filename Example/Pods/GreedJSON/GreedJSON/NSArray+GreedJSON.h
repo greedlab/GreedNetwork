@@ -13,11 +13,11 @@
 /**
  *  format NSArray to NSString
  */
-- (NSString*)gr_JSONString;
+- (NSString *)gr_JSONString;
 
 /**
  *  format NSArray to NSData
  */
-- (NSData*)gr_JSONData;
+- (NSData *)gr_JSONData;
 
 @end

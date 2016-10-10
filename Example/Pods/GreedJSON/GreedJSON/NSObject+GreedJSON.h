@@ -15,16 +15,16 @@
 /**
  *  all property names only in this class
  */
-- (NSArray*)gr_propertyNames;
+- (NSArray *)gr_propertyNames;
 
 /**
  *  all property names in this class and all super classes
  */
-- (NSMutableArray*)gr_allPropertyNames;
+- (NSMutableArray *)gr_allPropertyNames;
 
-- (NSMutableArray*)gr_allIgnoredPropertyNames;
-- (NSMutableDictionary*)gr_allReplacedPropertyNames;
-- (NSMutableDictionary*)gr_allClassInArray;
+- (NSMutableArray *)gr_allIgnoredPropertyNames;
+- (NSMutableDictionary *)gr_allReplacedPropertyNames;
+- (NSMutableDictionary *)gr_allClassInArray;
 
 #pragma mark - Property init
 
@@ -50,7 +50,7 @@
 /**
  *  class in array
  */
-+ (NSDictionary<NSString *, Class > *)gr_classInArray;
++ (NSDictionary<NSString *, Class> *)gr_classInArray;
 
 #pragma mark - Foundation
 
@@ -61,12 +61,12 @@
 /**
  *  update Model with NSDictionary
  */
-- (instancetype)gr_setDictionary:(NSDictionary*)dictionary;
+- (instancetype)gr_setDictionary:(NSDictionary *)dictionary;
 
 /**
- *  init Model with NSDictionary
+ *  init Model from NSDictionary
  */
-+ (id)gr_objectFromDictionary:(NSDictionary*)dictionary;
++ (id)gr_objectFromDictionary:(NSDictionary *)dictionary;
 
 /**
  *  get NSMutableDictionary from model, if gr_isFromFoundation return self

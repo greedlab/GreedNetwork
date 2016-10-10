@@ -13,11 +13,11 @@
 /**
  *  format NSDictionary to NSString
  */
-- (NSString*)gr_JSONString;
+- (NSString *)gr_JSONString;
 
 /**
  *  format NSDictionary to NSData
  */
-- (NSData*)gr_JSONData;
+- (NSData *)gr_JSONData;
 
 @end

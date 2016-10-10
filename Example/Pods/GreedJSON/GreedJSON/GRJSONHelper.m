@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 GreedLab. All rights reserved.
 //
 
-#import <objc/runtime.h>
 #import "GRJSONHelper.h"
 #import "NSObject+GreedJSON.h"
+#import <objc/runtime.h>
 
 static const char *property_getTypeName(objc_property_t property) {
     const char *attributes = property_getAttributes(property);
@@ -19,7 +19,7 @@ static const char *property_getTypeName(objc_property_t property) {
         if (attribute[0] == 'T') {
             size_t len = strlen(attribute);
             attribute[len - 1] = '\0';
-            return (const char *)[[NSData dataWithBytes:(attribute + 3) length:len - 2] bytes];
+            return (const char *) [[NSData dataWithBytes:(attribute + 3) length:len - 2] bytes];
         }
     }
     return "@";
@@ -27,23 +27,21 @@ static const char *property_getTypeName(objc_property_t property) {
 
 static NSSet *__grFoundationClasses;
 
-
 @implementation GRJSONHelper : NSObject
 
-static NSMutableDictionary <NSString *, NSMutableArray *> *propertyListByClass;
-static NSMutableDictionary <NSString *, NSMutableDictionary *> *propertyClassAndPropertyNameByClass;
+static NSMutableDictionary<NSString *, NSMutableArray *> *propertyListByClass;
+static NSMutableDictionary<NSString *, NSMutableDictionary *> *propertyClassAndPropertyNameByClass;
 
-+ (BOOL)isPropertyReadOnly:(Class)aClass propertyName:(NSString*)propertyName{
-    const char * type = property_getAttributes(class_getProperty(aClass, [propertyName UTF8String]));
-    NSString * typeString = [NSString stringWithUTF8String:type];
-    NSArray * attributes = [typeString componentsSeparatedByString:@","];
-    NSString * typeAttribute = [attributes objectAtIndex:1];
-    
++ (BOOL)isPropertyReadOnly:(Class)aClass propertyName:(NSString *)propertyName {
+    const char *type = property_getAttributes(class_getProperty(aClass, [propertyName UTF8String]));
+    NSString *typeString = [NSString stringWithUTF8String:type];
+    NSArray *attributes = [typeString componentsSeparatedByString:@","];
+    NSString *typeAttribute = [attributes objectAtIndex:1];
+
     return [typeAttribute rangeOfString:@"R"].length > 0;
 }
 
-+ (NSMutableArray *)allPropertyNames:(Class)aClass
-{
++ (NSMutableArray *)allPropertyNames:(Class)aClass {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     Class theClass = aClass;
     while (theClass && theClass != [NSObject class]) {
@@ -54,41 +52,39 @@ static NSMutableDictionary <NSString *, NSMutableDictionary *> *propertyClassAnd
     return array;
 }
 
-+ (NSArray *)propertyNames:(Class)aClass
-{
++ (NSArray *)propertyNames:(Class)aClass {
     if (!aClass || aClass == [NSObject class]) {
         return [NSArray array];
     }
     if (!propertyListByClass) {
         propertyListByClass = [[NSMutableDictionary alloc] init];
     }
-    
+
     NSString *className = NSStringFromClass(aClass);
     NSArray *value = [propertyListByClass objectForKey:className];
-    
+
     if (value) {
         return value;
     }
-    
+
     NSMutableArray *propertyNamesArray = [NSMutableArray array];
     unsigned int propertyCount = 0;
     objc_property_t *properties = class_copyPropertyList(aClass, &propertyCount);
-    
+
     for (unsigned int i = 0; i < propertyCount; ++i) {
         objc_property_t property = properties[i];
-        const char * name = property_getName(property);
-        
+        const char *name = property_getName(property);
+
         [propertyNamesArray addObject:[NSString stringWithUTF8String:name]];
     }
     free(properties);
-    
+
     [propertyListByClass setObject:propertyNamesArray forKey:className];
-    
+
     return propertyNamesArray;
 }
 
-+ (NSMutableDictionary <NSString *, NSMutableDictionary *> *)allPropertyClassesInClass:(Class)aClass
-{
++ (NSMutableDictionary<NSString *, NSMutableDictionary *> *)allPropertyClassesInClass:(Class)aClass {
     if (!propertyClassAndPropertyNameByClass) {
         propertyClassAndPropertyNameByClass = [[NSMutableDictionary alloc] init];
     }
@@ -96,10 +92,10 @@ static NSMutableDictionary <NSString *, NSMutableDictionary *> *propertyClassAnd
     NSMutableDictionary *propertyClassByPropertyName = [propertyClassAndPropertyNameByClass objectForKey:classKey];
     if (!propertyClassByPropertyName) {
         propertyClassByPropertyName = [[NSMutableDictionary alloc] init];
-        
+
         unsigned int propertyCount = 0;
         objc_property_t *properties = class_copyPropertyList(aClass, &propertyCount);
-        
+
         for (unsigned int i = 0; i < propertyCount; ++i) {
             objc_property_t property = properties[i];
             const char *name = property_getName(property);
@@ -119,8 +115,7 @@ static NSMutableDictionary <NSString *, NSMutableDictionary *> *propertyClassAnd
     return propertyClassByPropertyName;
 }
 
-+ (Class)propertyClassForPropertyName:(NSString *)propertyName ofClass:(Class)aClass
-{
++ (Class)propertyClassForPropertyName:(NSString *)propertyName ofClass:(Class)aClass {
     if (!propertyName || !aClass) {
         return nil;
     }
@@ -137,13 +132,12 @@ static NSMutableDictionary <NSString *, NSMutableDictionary *> *propertyClassAnd
     }
 }
 
-+ (NSMutableArray*)allIgnoredPropertyNames:(Class)aClass
-{
++ (NSMutableArray *)allIgnoredPropertyNames:(Class)aClass {
     Class theClass = aClass;
     NSMutableArray *array = [[NSMutableArray alloc] init];
     while (theClass && theClass != [NSObject class]) {
         NSArray *theArray = [theClass gr_ignoredPropertyNames];
-        [theArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [theArray enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
             if (![array containsObject:obj]) {
                 [array addObject:obj];
             }
@@ -153,13 +147,12 @@ static NSMutableDictionary <NSString *, NSMutableDictionary *> *propertyClassAnd
     return array;
 }
 
-+ (NSMutableDictionary*)allReplacedPropertyNames:(Class)aClass
-{
++ (NSMutableDictionary *)allReplacedPropertyNames:(Class)aClass {
     Class theClass = aClass;
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
     while (theClass && theClass != [NSObject class]) {
         NSDictionary *theDictionary = [theClass gr_replacedPropertyNames];
-        [theDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [theDictionary enumerateKeysAndObjectsUsingBlock:^(id _Nonnull key, id _Nonnull obj, BOOL *_Nonnull stop) {
             if (![dictionary objectForKey:key]) {
                 [dictionary setObject:obj forKey:key];
             }
@@ -169,13 +162,12 @@ static NSMutableDictionary <NSString *, NSMutableDictionary *> *propertyClassAnd
     return dictionary;
 }
 
-+ (NSMutableDictionary*)allClassInArray:(Class)aClass
-{
++ (NSMutableDictionary *)allClassInArray:(Class)aClass {
     Class theClass = aClass;
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
     while (theClass && theClass != [NSObject class]) {
         NSDictionary *theDictionary = [theClass gr_classInArray];
-        [theDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [theDictionary enumerateKeysAndObjectsUsingBlock:^(id _Nonnull key, id _Nonnull obj, BOOL *_Nonnull stop) {
             if (![dictionary objectForKey:key]) {
                 [dictionary setObject:obj forKey:key];
             }
@@ -187,25 +179,23 @@ static NSMutableDictionary <NSString *, NSMutableDictionary *> *propertyClassAnd
 
 #pragma mark - Foundation
 
-+ (NSSet *)foundationClasses
-{
++ (NSSet *)foundationClasses {
     if (!__grFoundationClasses) {
         __grFoundationClasses = [NSSet setWithObjects:
-                                 [NSURL class],
-                                 [NSDate class],
-                                 [NSValue class],
-                                 [NSData class],
-                                 [NSError class],
-                                 [NSArray class],
-                                 [NSDictionary class],
-                                 [NSString class],
-                                 [NSAttributedString class], nil];
+                                           [NSURL class],
+                                           [NSDate class],
+                                           [NSValue class],
+                                           [NSData class],
+                                           [NSError class],
+                                           [NSArray class],
+                                           [NSDictionary class],
+                                           [NSString class],
+                                           [NSAttributedString class], nil];
     }
     return __grFoundationClasses;
 }
 
-+ (BOOL)isClassFromFoundation:(Class)aClass
-{
++ (BOOL)isClassFromFoundation:(Class)aClass {
     __block BOOL result = NO;
     [[self foundationClasses] enumerateObjectsUsingBlock:^(Class foundationClass, BOOL *stop) {
         if ([aClass isSubclassOfClass:foundationClass]) {

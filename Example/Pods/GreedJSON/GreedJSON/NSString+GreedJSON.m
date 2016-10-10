@@ -10,33 +10,31 @@
 
 @implementation NSString (GreedJSON)
 
-- (id)gr_object
-{
+- (id)gr_object {
     if (self.length == 0) {
         return nil;
     }
     NSError *error;
-    NSData *data = [self dataUsingEncoding: NSUTF8StringEncoding];
-    
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+
     id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
     if (error) {
-        NSLog(@"** GreedJSON ** %@",[error localizedDescription]);
+        NSLog(@"** GreedJSON ** %@", [error localizedDescription]);
     }
-    
+
     return object;
 }
 
-- (id)gr_objectWithOptions:(NSJSONReadingOptions)options
-{
+- (id)gr_objectWithOptions:(NSJSONReadingOptions)options {
     if (self.length == 0) {
         return nil;
     }
     NSError *error;
-    NSData *data = [self dataUsingEncoding: NSUTF8StringEncoding];
-    
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+
     id object = [NSJSONSerialization JSONObjectWithData:data options:options error:&error];
     if (error) {
-        NSLog(@"** GreedJSON ** %@",[error localizedDescription]);
+        NSLog(@"** GreedJSON ** %@", [error localizedDescription]);
     }
     return object;
 }

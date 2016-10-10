@@ -13,8 +13,8 @@
 /**
  *  format NSData to NSDictionary or NSArray
  */
-- (__kindof NSObject*)gr_object;
+- (__kindof NSObject *)gr_object;
 
-- (__kindof NSObject*)gr_objectWithOptions:(NSJSONReadingOptions)options;
+- (__kindof NSObject *)gr_objectWithOptions:(NSJSONReadingOptions)options;
 
 @end

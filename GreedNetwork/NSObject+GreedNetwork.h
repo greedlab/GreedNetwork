@@ -13,6 +13,10 @@
 
 @interface NSObject (GreedNetwork)
 
+@property (nonatomic, strong, readonly) AFHTTPSessionManager *gr_sessionManager;
+
+#pragma mark - request
+
 - (void)gr_requestWithNetworkForm:(GRNetworkForm *)form;
 
 - (void)gr_requestWithNetworkForm:(GRNetworkForm *)form

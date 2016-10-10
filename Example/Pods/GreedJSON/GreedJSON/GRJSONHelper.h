@@ -8,12 +8,12 @@
 
 @interface GRJSONHelper : NSObject
 
-+ (BOOL)isPropertyReadOnly:(Class)aClass propertyName:(NSString*)propertyName;
++ (BOOL)isPropertyReadOnly:(Class)aClass propertyName:(NSString *)propertyName;
 
 /**
  *  all property classes ins class
  */
-+ (NSMutableDictionary <NSString *, NSMutableDictionary *> *)allPropertyClassesInClass:(Class)aClass;
++ (NSMutableDictionary<NSString *, NSMutableDictionary *> *)allPropertyClassesInClass:(Class)aClass;
 
 /**
  *  get the class of the property [propertyName] for the class [aClass]
@@ -43,9 +43,9 @@
  */
 + (NSArray *)propertyNames:(Class)aClass;
 
-+ (NSMutableArray*)allIgnoredPropertyNames:(Class)aClass;
-+ (NSMutableDictionary*)allReplacedPropertyNames:(Class)aClass;
-+ (NSMutableDictionary*)allClassInArray:(Class)aClass;
++ (NSMutableArray *)allIgnoredPropertyNames:(Class)aClass;
++ (NSMutableDictionary *)allReplacedPropertyNames:(Class)aClass;
++ (NSMutableDictionary *)allClassInArray:(Class)aClass;
 
 #pragma mark - Foundation
 
