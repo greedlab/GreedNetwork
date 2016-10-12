@@ -20,6 +20,8 @@
     AFHTTPSessionManager *manager = objc_getAssociatedObject(self, _cmd);
     if (!manager) {
         manager = [AFHTTPSessionManager manager];
+        
+        objc_setAssociatedObject(self, _cmd, manager, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return manager;
 }
