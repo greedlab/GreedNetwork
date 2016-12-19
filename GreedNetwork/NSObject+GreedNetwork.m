@@ -17,14 +17,14 @@
 @dynamic gr_sessionManager;
 
 - (AFHTTPSessionManager *)gr_sessionManager {
-    AFHTTPSessionManager *manager = objc_getAssociatedObject(self, _cmd);
-    if (!manager) {
-        manager = [AFHTTPSessionManager manager];
-        
-        objc_setAssociatedObject(self, _cmd, manager, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    }
-    return manager;
+    static AFHTTPSessionManager *__manager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        __manager = [AFHTTPSessionManager manager];
+    });
+    return __manager;
 }
+
 
 - (void)gr_requestWithNetworkForm:(GRNetworkForm *)form {
     [self gr_requestWithNetworkForm:form success:nil failure:nil];

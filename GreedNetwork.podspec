@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "GreedNetwork"
-  s.version      = "1.0.2"
+  s.version      = "1.0.3"
   s.summary      = "network request for iOS"
 
   s.description  = %{network request for iOS, based on AFNetworking and GreedJSON }
