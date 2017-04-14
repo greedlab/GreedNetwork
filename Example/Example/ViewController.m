@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "GRTestForm.h"
 #import "GreedNetwork.h"
-#import "GReedJSON.h"
+#import "GreedJSON.h"
 
 @interface ViewController ()
 

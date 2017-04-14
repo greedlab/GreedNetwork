@@ -33,67 +33,72 @@
 - (void)gr_requestWithNetworkForm:(GRNetworkForm *)form
                           success:(void (^)(GRNetworkResponse *responseObject))success
                           failure:(void (^)(GRNetworkResponse *responseObject))failure {
-    [self gr_requestWithNetworkForm:form responseSerializer:[AFHTTPResponseSerializer serializer] success:^(NSURLResponse *URLResponse, id responseObject) {
-        GRNetworkResponse *response = [[GRNetworkResponse alloc] init];
-        if (form.aliseEmoji) { // convert alise to emoji
-            NSString *retString; // response JSON string
-            if ([responseObject isKindOfClass:[NSData class]]) {
-                retString = [[NSString alloc] initWithData:(NSData *) responseObject encoding:NSUTF8StringEncoding];
-            } else if ([responseObject isKindOfClass:[NSString class]]) {
-                retString = (NSString *) responseObject;
-            } else if ([responseObject isKindOfClass:[NSDictionary class]]) {
-                retString = [(NSDictionary *) responseObject gr_JSONString];
-            } else if ([responseObject isKindOfClass:[NSArray class]]) {
-                retString = [(NSArray *) responseObject gr_JSONString];
+    [self gr_requestWithNetworkForm:form
+        responseSerializer:[AFHTTPResponseSerializer serializer]
+        success:^(NSURLResponse *URLResponse, id responseObject) {
+            GRNetworkResponse *response = [[GRNetworkResponse alloc] init];
+            if (form.aliseEmoji) {   // convert alise to emoji
+                NSString *retString; // response JSON string
+                if ([responseObject isKindOfClass:[NSData class]]) {
+                    retString = [[NSString alloc] initWithData:(NSData *) responseObject encoding:NSUTF8StringEncoding];
+                } else if ([responseObject isKindOfClass:[NSString class]]) {
+                    retString = (NSString *) responseObject;
+                } else if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                    retString = [(NSDictionary *) responseObject gr_JSONString];
+                } else if ([responseObject isKindOfClass:[NSArray class]]) {
+                    retString = [(NSArray *) responseObject gr_JSONString];
+                }
+                retString = [retString emojizedString];
+                [response setResponseObject:retString];
+            } else {
+                [response setResponseObject:responseObject];
             }
-            retString = [retString emojizedString];
-            [response setResponseObject:retString];
-        } else {
-            [response setResponseObject:responseObject];
+            if ([URLResponse isKindOfClass:[NSHTTPURLResponse class]]) {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) URLResponse;
+                response.responseCode = httpResponse.statusCode; // response status code
+            }
+            if (form.successBlock) {
+                form.successBlock(response);
+            }
+            if (success) {
+                success(response);
+            }
         }
-        if ([URLResponse isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) URLResponse;
-            response.responseCode = httpResponse.statusCode; // response status code
-        }
-        if (form.successBlock) {
-            form.successBlock(response);
-        }
-        if (success) {
-            success(response);
-        }
-    }
-                            failure:^(NSURLResponse *URLResponse, NSError *error) {
-                                NSString *responseObject = [[NSString alloc] initWithData:(NSData *) error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
-                                GRNetworkResponse *response = [[GRNetworkResponse alloc] init];
-                                if (form.aliseEmoji) {
-                                    NSString *retString;
-                                    if ([responseObject isKindOfClass:[NSData class]]) {
-                                        retString = [[NSString alloc] initWithData:(NSData *) responseObject encoding:NSUTF8StringEncoding];
-                                    } else if ([responseObject isKindOfClass:[NSString class]]) {
-                                        retString = (NSString *) responseObject;
-                                    } else if ([responseObject isKindOfClass:[NSDictionary class]]) {
-                                        retString = [(NSDictionary *) responseObject gr_JSONString];
-                                    } else if ([responseObject isKindOfClass:[NSArray class]]) {
-                                        retString = [(NSArray *) responseObject gr_JSONString];
-                                    }
-                                    retString = [retString emojizedString];
-                                    [response setResponseObject:retString];
-                                } else {
-                                    [response setResponseObject:responseObject];
-                                }
-                                if ([URLResponse isKindOfClass:[NSHTTPURLResponse class]]) {
-                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) URLResponse;
-                                    response.responseCode = httpResponse.statusCode;
-                                    NSLog(@"*** GreedNetwork *** request eror with status code:%ld", (long) httpResponse.statusCode);
-                                }
-                                response.error = error;
-                                if (form.failureBlock) {
-                                    form.failureBlock(response);
-                                }
-                                if (failure) {
-                                    failure(response);
-                                }
-                            }];
+        failure:^(NSURLResponse *URLResponse, NSError *error) {
+            GRNetworkResponse *response = [[GRNetworkResponse alloc] init];
+            if (error) {
+                NSString *responseObject = [[NSString alloc] initWithData:(NSData *) error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+                if (form.aliseEmoji) {
+                    NSString *retString;
+                    if ([responseObject isKindOfClass:[NSData class]]) {
+                        retString = [[NSString alloc] initWithData:(NSData *) responseObject encoding:NSUTF8StringEncoding];
+                    } else if ([responseObject isKindOfClass:[NSString class]]) {
+                        retString = (NSString *) responseObject;
+                    } else if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                        retString = [(NSDictionary *) responseObject gr_JSONString];
+                    } else if ([responseObject isKindOfClass:[NSArray class]]) {
+                        retString = [(NSArray *) responseObject gr_JSONString];
+                    }
+                    retString = [retString emojizedString];
+                    [response setResponseObject:retString];
+                } else {
+                    [response setResponseObject:responseObject];
+                }
+            }
+
+            if ([URLResponse isKindOfClass:[NSHTTPURLResponse class]]) {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) URLResponse;
+                response.responseCode = httpResponse.statusCode;
+                NSLog(@"*** GreedNetwork *** request eror with status code:%ld", (long) httpResponse.statusCode);
+            }
+            response.error = error;
+            if (form.failureBlock) {
+                form.failureBlock(response);
+            }
+            if (failure) {
+                failure(response);
+            }
+        }];
 }
 
 - (void)gr_requestWithNetworkForm:(GRNetworkForm *)form

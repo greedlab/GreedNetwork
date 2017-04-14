@@ -16,7 +16,7 @@ PODS:
     - AFNetworking/NSURLSession
   - GreedEmoji (0.0.1)
   - GreedJSON (0.1.6)
-  - GreedNetwork (1.0.0):
+  - GreedNetwork (1.0.3):
     - AFNetworking
     - GreedEmoji
     - GreedJSON
@@ -32,8 +32,8 @@ SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   GreedEmoji: 1060de8ed6701a4c0ab2863e8ff4e25f30de214e
   GreedJSON: b07c2998994dbd42ad1d36e9464eba28f3478d4e
-  GreedNetwork: 9687c39df496a6a4ad90abd5a70bbc672b3d40d7
+  GreedNetwork: 77dd17093c2ed8d99d127d04f129c317681d6ab4
 
 PODFILE CHECKSUM: ef80773a7ee03bc3bf598be1de970337cb9e7b2e
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.2.0

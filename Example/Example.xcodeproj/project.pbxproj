@@ -16,8 +16,6 @@
 		289ADD911BD8CC7E006277FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 289ADD8F1BD8CC7E006277FD /* LaunchScreen.storyboard */; };
 		289ADD9B1BD8CEBE006277FD /* GreedNetwork.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 289ADD981BD8CEBE006277FD /* GreedNetwork.podspec */; };
 		7FF46EF87AF8E82465FC3588 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5475543CC36909D588E4D53B /* Pods_Example.framework */; };
-		E770202C1D2BA46E00DDF7E7 /* Pods-Example.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E770202A1D2BA46E00DDF7E7 /* Pods-Example.debug.xcconfig */; };
-		E770202D1D2BA46E00DDF7E7 /* Pods-Example.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E770202B1D2BA46E00DDF7E7 /* Pods-Example.release.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -145,7 +143,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = GR;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = GreedLab;
 				TargetAttributes = {
 					289ADD7D1BD8CC7D006277FD = {
@@ -176,11 +174,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E770202C1D2BA46E00DDF7E7 /* Pods-Example.debug.xcconfig in Resources */,
 				289ADD911BD8CC7E006277FD /* LaunchScreen.storyboard in Resources */,
 				289ADD9B1BD8CEBE006277FD /* GreedNetwork.podspec in Resources */,
 				289ADD8E1BD8CC7E006277FD /* Assets.xcassets in Resources */,
-				E770202D1D2BA46E00DDF7E7 /* Pods-Example.release.xcconfig in Resources */,
 				289ADD8C1BD8CC7E006277FD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,7 +196,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		5245597BC6A8E248C5B7D6E0 /* [CP] Embed Pods Frameworks */ = {
@@ -282,8 +278,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -326,8 +324,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
